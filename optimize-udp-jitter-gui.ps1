@@ -59,6 +59,7 @@ function Show-UjValidationMessage {
 
 function Update-UjRunButtonState {
   [CmdletBinding()]
+  [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
   [OutputType([void])]
   param()
   $btnRun.Enabled = $script:IsAdministrator -or $chkDryRun.Checked
@@ -293,7 +294,7 @@ function Resolve-UjGuiRunParameter {
   $action = $comboAction.SelectedItem.ToString()
   $backupFolder = $txtBackup.Text.Trim()
 
-  # Parse preset number from descriptive label (e.g. '1 (Conservative)' → 1)
+  # Parse preset number from descriptive label (e.g. '1 (Conservative)' -> 1)
   $presetStr = $comboPreset.SelectedItem.ToString()
   $preset = if ($presetStr -match '^(\d+)') { [int]$Matches[1] } else { 1 }
 
